@@ -7,7 +7,7 @@ from aiogram.filters.command import CommandStart
 
 from sqlalchemy.future import select
 
-from config import BOT_TOKEN, ADMIN_ID
+from config import BOT_TOKEN, ADMIN_IDS_LIST
 from database import engine, Base, get_db
 from models import User
 
@@ -46,7 +46,7 @@ async def cmd_start(message: types.Message):
 @dp.message(Command("send_all"))
 async def cmd_send_all(message: types.Message):
     # Проверка, что команду отправил админ
-    if message.from_user.id != ADMIN_ID:
+    if message.from_user.id not in ADMIN_IDS_LIST:
         return await message.answer("У вас нет прав для выполнения этой команды.")
 
     # Проверка, что команда отправлена в ответ на сообщение
