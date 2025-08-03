@@ -39,7 +39,12 @@ async def save_user(user_id: int):
 @dp.message(CommandStart())
 async def cmd_start(message: types.Message):
     await save_user(message.from_user.id)
-    await message.answer("Привет! Вы подписаны на рассылку.")
+    file_id = 'AgACAgIAAxkBAANEaI9VQWVGBN6q1rPc4UETDZKBLP0AAmD0MRsV3oFIPpn-N2U3NpcBAAMCAAN5AAM2BA'
+    text = "Добро пожаловать в чат-бот ДВУХДНЕВНОГО ОНЛАЙН-ВЕБИНАР С ТАНЕЙ TEYLA ❤️\n\n<b>Вебинар пройдет 12 и 13 августа.</b>\n\nВ этом чат-боте мы будем напоминать вам про вебинар, чтобы вы его не пропустили 😉"
+    markup = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="Связаться с менеджером", url="https://t.me/Teylaschool")]
+    ])
+    await message.answer_photo(photo=file_id, caption=text, parse_mode='HTML', reply_markup=markup)
 
 
 # Команда /send_all от админа
